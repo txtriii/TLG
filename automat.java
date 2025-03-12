@@ -13,7 +13,7 @@ public class automat{
 		
 		apProb = 1;
 		
-		System.out.println("initalisation of static String arrays…");
+		System.out.println("initalisation of static String arrays...");
 		
 		System.out.println(zeichen);
 		System.out.println(vokal);
@@ -21,9 +21,9 @@ public class automat{
 		System.out.println(konsonant);
 		//System.out.println(konsonantAp);
 		
-		System.out.println("…done \n");
+		System.out.println("...done \n");
 		
-		System.out.println("test of selectChar method…");
+		System.out.println("test of selectChar method...");
 		
 		System.out.println(selectChar());	// 1
 		System.out.println(selectChar());	// 2
@@ -39,9 +39,9 @@ public class automat{
 		System.out.println(selectChar());
 		System.out.println(selectChar());	// 12
 		
-		System.out.println("…done \n");
+		System.out.println("...done \n");
 		
-		System.out.println("test of selectVokal method…");
+		System.out.println("test of selectVokal method...");
 		
 		System.out.println(selectVokal());
 		System.out.println(selectVokal());
@@ -49,9 +49,9 @@ public class automat{
 		System.out.println(selectVokal());
 		System.out.println(selectVokal());
 		
-		System.out.println("…done \n");
+		System.out.println("...done \n");
 		
-		System.out.println("test of selectVokalAp method…");
+		System.out.println("test of selectVokalAp method...");
 		
 		System.out.println(selectVokalAp());
 		System.out.println(selectVokalAp());
@@ -61,26 +61,65 @@ public class automat{
 		System.out.println(selectVokalAp());
 		System.out.println(selectVokalAp());
 		
-		System.out.println("…done \n");
-	
+		System.out.println("...done \n");
+		
+		System.out.println("test of silben methods...");
+		
+		System.out.println("\n |A-V|")
+		for(int i = 0, i++, i<5){
+		    System.out.println(silbeAV());
+	    }
+	    System.out.println("\n |K-V|")
+		for(int i = 0, i++, i<5){
+		    System.out.println(silbeKV());
+	    }
+	    System.out.println("\n |K-A|")
+		for(int i = 0, i++, i<5){
+		    System.out.println(silbeKA());
+	    }
 	}
 	
-	public String erzeugeWort(){
-		String wort = "";
+	public String erzeugeWort(int wortLen){
+		String wort = silbe1();
+		Sring tempSilbe = "";
+		int status = 0;
+		int silbenNummer = 1;
+		while(silbenNummer < wortLen){
+		    switch(status){
+		        case 0:
+		            wort = wort + silbeKA();
+		    }
+		}
 		return wort;
-		
 	}
 	
-	public String silbeApV(){
-		String sApV = "";
-		
-		return sApV;
+	//TODO Pre u Suf silben verbieten
+	
+	public String silbeAV(){
+		String sAV = selectKonsoAp() + selectVokal();
+		return sAV;
 	}
 	
 	public String silbeKV(){
-		String sKV = "";
-		
+		String sKV = selectKonso() + selectVokal();
 		return sKV;
+	}
+	
+	public String silbeKA(){
+	    String sKA = selectKonso() + selectVokalAp();
+	    return sKA;
+	}
+	
+	public String silbe1(){
+	    String s1 = silbeKA();
+	}
+	
+	public String silbeVerbEnd(){
+	    String sVE = silbeKV();
+	}
+	
+	public String silbeEnd(){
+	    String sE = silbeKA();
 	}
 	
 	public String selectChar(){
@@ -188,8 +227,8 @@ public class automat{
 	}
 	
 	public static int randomNumber(int von, int bis) {
-      int randomNr = von + (int)(Math.random() * (double)(bis - von + 1));
-      return randomNr;
+	    int randomNr = von + (int)(Math.random() * (double)(bis - von + 1));
+	    return randomNr;
 	}
 	
 	// / / / / /
