@@ -9,88 +9,43 @@ public class automat{
 	static String[] konsonant = {"s","l","th","t","n"};
 	//static String[] konsonantAp = {"s","l","th","t","n","'"};
 	
-	public automat(){
-		
+	public automat(boolean pConOut){
 		apProb = 1;
-		
-		System.out.println("initalisation of static String arrays...");
-		
-		System.out.println(zeichen);
-		System.out.println(vokal);
-		//System.out.println(vokalAp);
-		System.out.println(konsonant);
-		//System.out.println(konsonantAp);
-		
-		System.out.println("...done \n");
-		
-		System.out.println("test of selectChar method...");
-		
-		System.out.println(selectChar());	// 1
-		System.out.println(selectChar());	// 2
-		System.out.println(selectChar());
-		System.out.println(selectChar());
-		System.out.println(selectChar());
-		System.out.println(selectChar());	// 5
-		System.out.println(selectChar());
-		System.out.println(selectChar());
-		System.out.println(selectChar());
-		System.out.println(selectChar());
-		System.out.println(selectChar());	// 10
-		System.out.println(selectChar());
-		System.out.println(selectChar());	// 12
-		
-		System.out.println("...done \n");
-		
-		System.out.println("test of selectVokal method...");
-		
-		System.out.println(selectVokal());
-		System.out.println(selectVokal());
-		System.out.println(selectVokal());
-		System.out.println(selectVokal());
-		System.out.println(selectVokal());
-		
-		System.out.println("...done \n");
-		
-		System.out.println("test of selectVokalAp method...");
-		
-		System.out.println(selectVokalAp());
-		System.out.println(selectVokalAp());
-		System.out.println(selectVokalAp());
-		System.out.println(selectVokalAp());
-		System.out.println(selectVokalAp());
-		System.out.println(selectVokalAp());
-		System.out.println(selectVokalAp());
-		
-		System.out.println("...done \n");
-		
-		System.out.println("test of silben methods...");
-		
-		System.out.println("\n|A-V|");
-		for(int i = 0; i<5; i++){
-		    System.out.println(silbeAV());
-	    }
-	    System.out.println("\n|K-V|");
-		for(int i = 0; i<5; i++){
-		    System.out.println(silbeKV());
-	    }
-	    System.out.println("\n|K-A|");
-		for(int i = 0; i<5; i++){
-		    System.out.println(silbeKA());
-	    }
-		System.out.println("\n...done \n");
-
+		constructorOutput(pConOut);
+		for(int menge = 0; menge < 100; menge++){
+		System.out.println(erzeugeWort(4));
+		}
 	}
 	
 	public String erzeugeWort(int wortLen){
-		String wort = silbe1();
 		String tempSilbe = "";
-		int status = 0;
+		int status = 1;
+		String wort = silbe1();
 		int silbenNummer = 1;
 		while(silbenNummer < wortLen){
 		    switch(status){
-		        case 0:
+				case 0:
+					wort = wort + silbeKV();
+					status = randomNumber(1, 2);
+					break;
+		        case 1:
 		            wort = wort + silbeKA();
+					if(wort.endsWith("'")){
+						status = 0;
+					}else{
+						status = randomNumber(1, 2);
+					}
+					break;
+				case 2:
+					tempSilbe = silbeAV();
+					wort.concat(tempSilbe);
+					if(tempSilbe.startsWith("'")){
+						status = 0;
+					}else{
+						status = randomNumber(1, 2);
+					}					
 		    }
+			silbenNummer++;
 		}
 		return wort;
 	}
@@ -236,10 +191,80 @@ public class automat{
 	    return randomNr;
 	}
 	
+	public void constructorOutput(boolean pBoo){
+		if(pBoo){
+
+		System.out.println("initalisation of static String arrays...");
+		
+		System.out.println(zeichen);
+		System.out.println(vokal);
+		//System.out.println(vokalAp);
+		System.out.println(konsonant);
+		//System.out.println(konsonantAp);
+		
+		System.out.println("...done \n");
+		
+		System.out.println("test of selectChar method...");
+		
+		System.out.println(selectChar());	// 1
+		System.out.println(selectChar());	// 2
+		System.out.println(selectChar());
+		System.out.println(selectChar());
+		System.out.println(selectChar());
+		System.out.println(selectChar());	// 5
+		System.out.println(selectChar());
+		System.out.println(selectChar());
+		System.out.println(selectChar());
+		System.out.println(selectChar());
+		System.out.println(selectChar());	// 10
+		System.out.println(selectChar());
+		System.out.println(selectChar());	// 12
+		
+		System.out.println("...done \n");
+		
+		System.out.println("test of selectVokal method...");
+		
+		System.out.println(selectVokal());
+		System.out.println(selectVokal());
+		System.out.println(selectVokal());
+		System.out.println(selectVokal());
+		System.out.println(selectVokal());
+		
+		System.out.println("...done \n");
+		
+		System.out.println("test of selectVokalAp method...");
+		
+		System.out.println(selectVokalAp());
+		System.out.println(selectVokalAp());
+		System.out.println(selectVokalAp());
+		System.out.println(selectVokalAp());
+		System.out.println(selectVokalAp());
+		System.out.println(selectVokalAp());
+		System.out.println(selectVokalAp());
+		
+		System.out.println("...done \n");
+		
+		System.out.println("test of silben methods...");
+		
+		System.out.println("\n|A-V|");
+		for(int i = 0; i<5; i++){
+		    System.out.println(silbeAV());
+	    }
+	    System.out.println("\n|K-V|");
+		for(int i = 0; i<5; i++){
+		    System.out.println(silbeKV());
+	    }
+	    System.out.println("\n|K-A|");
+		for(int i = 0; i<5; i++){
+		    System.out.println(silbeKA());
+	    }
+		System.out.println("\n...done \n");
+		}
+	}
 	// / / / / /
    
 	public static void main(String args[]){
 
-        automat pAuto = new automat();
+        automat pAuto = new automat(false);
     }
 }
