@@ -65,23 +65,25 @@ public class automat{
 		
 		System.out.println("test of silben methods...");
 		
-		System.out.println("\n |A-V|")
-		for(int i = 0, i++, i<5){
+		System.out.println("\n|A-V|");
+		for(int i = 0; i<5; i++){
 		    System.out.println(silbeAV());
 	    }
-	    System.out.println("\n |K-V|")
-		for(int i = 0, i++, i<5){
+	    System.out.println("\n|K-V|");
+		for(int i = 0; i<5; i++){
 		    System.out.println(silbeKV());
 	    }
-	    System.out.println("\n |K-A|")
-		for(int i = 0, i++, i<5){
+	    System.out.println("\n|K-A|");
+		for(int i = 0; i<5; i++){
 		    System.out.println(silbeKA());
 	    }
+		System.out.println("\n...done \n");
+
 	}
 	
 	public String erzeugeWort(int wortLen){
 		String wort = silbe1();
-		Sring tempSilbe = "";
+		String tempSilbe = "";
 		int status = 0;
 		int silbenNummer = 1;
 		while(silbenNummer < wortLen){
@@ -112,14 +114,17 @@ public class automat{
 	
 	public String silbe1(){
 	    String s1 = silbeKA();
+		return s1;
 	}
 	
 	public String silbeVerbEnd(){
 	    String sVE = silbeKV();
+		return sVE;
 	}
 	
 	public String silbeEnd(){
 	    String sE = silbeKA();
+		return sE;
 	}
 	
 	public String selectChar(){
