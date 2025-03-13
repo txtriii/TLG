@@ -1,5 +1,5 @@
 
-public class automat{
+class automat{
 
 	int apProb;
 	
