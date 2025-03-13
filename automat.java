@@ -1,5 +1,5 @@
 
-class automat{
+public class automat{
 
 	int apProb;
 	
@@ -11,7 +11,7 @@ class automat{
 		apProb = 1;
 		constructorOutput(pConOut);
 		for(int menge = 0; menge < 100; menge++){
-		System.out.println(erzeugeWort(4));
+		System.out.println(erzeugeWort(7));
 		}
 	}
 	
