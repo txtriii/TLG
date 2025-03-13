@@ -5,9 +5,7 @@ public class automat{
 	
 	static String[] zeichen = {"a","e","s","l","i","th","t","n","'"};
 	static String[] vokal = {"a","e","i"};
-	//static String[] vokalAp = {"a","e","i","'"};
 	static String[] konsonant = {"s","l","th","t","n"};
-	//static String[] konsonantAp = {"s","l","th","t","n","'"};
 	
 	public automat(boolean pConOut){
 		apProb = 1;
