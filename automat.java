@@ -1,4 +1,4 @@
-
+import sas.Tools;
 public class automat{
 
 	int apProb;
@@ -48,6 +48,41 @@ public class automat{
 		return wort;
 	}
 	
+	public String erzeugeWortOhneSuf(int wortLen){
+		String tempSilbe = "";
+		int status = 1;
+		String wort = silbe1();
+		int silbenNummer = 1;
+		while(silbenNummer < wortLen-1){
+		    switch(status){
+				case 0:
+					wort = wort + silbeKV();
+					status = randomNumber(1, 2);
+					break;
+		        case 1:
+		            wort = wort + silbeKA();
+					if(wort.endsWith("'")){
+						status = 0;
+					}else{
+						status = randomNumber(1, 2);
+					}
+					break;
+				case 2:
+					tempSilbe = silbeAV();
+					wort.concat(tempSilbe);
+					if(tempSilbe.startsWith("'")){
+						status = 0;
+					}else{
+						status = randomNumber(1, 2);
+					}					
+		    }
+			silbenNummer++;
+		}
+		wort = wort +
+		return wort;
+	}
+	
+
 	//TODO Pre u Suf silben verbieten
 	
 	public String silbeAV(){
@@ -184,10 +219,12 @@ public class automat{
 		return pKonsoAp;
 	}
 	
+	/**
 	public static int randomNumber(int von, int bis) {
 	    int randomNr = von + (int)(Math.random() * (double)(bis - von + 1));
 	    return randomNr;
 	}
+	*/
 	
 	public void constructorOutput(boolean pBoo){
 		if(pBoo){
