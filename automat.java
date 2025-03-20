@@ -8,7 +8,7 @@ public class automat{
 	static String[] konsonant = {"s","l","th","t","n"};
 	
 	public automat(boolean pConOut){
-		apProb = 1;
+		apProb = 3;
 		constructorOutput(pConOut);
 		for(int menge = 0; menge < 100; menge++){
 		System.out.println(erzeugeWort(7));
