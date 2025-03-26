@@ -20,6 +20,7 @@ public class AppFrame extends JFrame {
   private JSpinner jSpinner1 = new JSpinner();
     private SpinnerNumberModel jSpinner1Model = new SpinnerNumberModel(3, 1, 20, 1);
   private JCheckBox jCheckBox1 = new JCheckBox();
+  Wort pWort;
   // Ende Attribute
   
   public AppFrame() { 
@@ -109,17 +110,17 @@ public class AppFrame extends JFrame {
     // Ende Komponenten
     
     setVisible(true);
+
+    pWort = new Wort(true);
   }
   
   // Anfang Methoden
   
   public static void main(String[] args) {
     new AppFrame();
-    Wort pWort = new Wort(true);
   }
   public void jButton1_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
-    
+    taubischTxtField.setText(pWort.uebersetze(deutschTxtField.getText(),0,5));    
   }
 
   public void wortartButton_ActionPerformed(ActionEvent evt) {
