@@ -1,5 +1,5 @@
 import sas.Tools;
-public class automat{
+public class Wort{
 
 	int apProb;
 	
@@ -7,7 +7,9 @@ public class automat{
 	static String[] vokal = {"a","e","i"};
 	static String[] konsonant = {"s","l","th","t","n"};
 	
-	public automat(boolean pConOut){
+	BinarySearchTree<Uebersetzung> translationTree = new BinarySearchTree<Uebersetzung>();
+
+	public Wort(boolean pConOut){
 		apProb = 3;
 		constructorOutput(pConOut);
 		for(int menge = 0; menge < 100; menge++){
@@ -78,7 +80,7 @@ public class automat{
 		    }
 			silbenNummer++;
 		}
-		wort = wort +
+		//wort = wort + s
 		return wort;
 	}
 	
@@ -219,12 +221,12 @@ public class automat{
 		return pKonsoAp;
 	}
 	
-	/**
+	
 	public static int randomNumber(int von, int bis) {
 	    int randomNr = von + (int)(Math.random() * (double)(bis - von + 1));
 	    return randomNr;
 	}
-	*/
+	
 	
 	public void constructorOutput(boolean pBoo){
 		if(pBoo){
@@ -300,6 +302,6 @@ public class automat{
    
 	public static void main(String args[]){
 
-        automat pAuto = new automat(false);
+        Wort pAuto = new Wort(false);
     }
 }
