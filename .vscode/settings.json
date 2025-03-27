@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\twgam\\Downloads\\sasRetina_java8.jar"
+    ]
+}
