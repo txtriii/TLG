@@ -1,54 +1,184 @@
-
-public class automat{
+import sas.Tools;
+public class Wort{
 
 	int apProb;
-	
+	int maxGenerationTries = 5;
 	static String[] zeichen = {"a","e","s","l","i","th","t","n","'"};
 	static String[] vokal = {"a","e","i"};
 	static String[] konsonant = {"s","l","th","t","n"};
-	
-	public automat(boolean pConOut){
+	BinarySearchTree<TaubischString> alleTauben = new BinarySearchTree<TaubischString>();
+	BinarySearchTree<Uebersetzung> translationTreeDE = new BinarySearchTree<Uebersetzung>();
+
+	public Wort(boolean pConOut){
 		apProb = 3;
 		constructorOutput(pConOut);
-		for(int menge = 0; menge < 100; menge++){
-		System.out.println(erzeugeWort(7));
-		}
+		// for(int menge = 0; menge < 100; menge++){
+		// System.out.println(erzeugeWort(7));
+		// }
 	}
 	
-	public String erzeugeWort(int wortLen){
-		String tempSilbe = "";
-		int status = 1;
-		String wort = silbe1();
-		int silbenNummer = 1;
-		while(silbenNummer < wortLen){
-		    switch(status){
+
+	public void uebersetze(String pDeutsch, int pWortArt,int pLen){
+		if(translationTreeDE.search(new Uebersetzung(pDeutsch)) == null){
+			switch (pWortArt){
 				case 0:
-					wort = wort + silbeKV();
-					status = randomNumber(1, 2);
+					translationTreeDE.insert(new Uebersetzung(pDeutsch,erzeugeSubstantiv(pLen,0)));
 					break;
-		        case 1:
-		            wort = wort + silbeKA();
-					if(wort.endsWith("'")){
-						status = 0;
-					}else{
-						status = randomNumber(1, 2);
-					}
+				case 1:
+					translationTreeDE.insert(new Uebersetzung(pDeutsch,erzeugeVerb(pLen,0)));
 					break;
-				case 2:
-					tempSilbe = silbeAV();
-					wort.concat(tempSilbe);
-					if(tempSilbe.startsWith("'")){
-						status = 0;
-					}else{
-						status = randomNumber(1, 2);
-					}					
-		    }
-			silbenNummer++;
+				default:
+					translationTreeDE.insert(new Uebersetzung(pDeutsch,erzeugeSubstantiv(pLen,0)));
+					break;
+			}
+		}else{
+			throw new IllegalArgumentException("Übersetzung für '{pDeutsch}' existiert bereits.");
 		}
-		return wort;
+	}
+
+	public TaubischString erzeugeSubstantiv(int wortLen,int alreadyGeneratedExeptions){
+		if(alreadyGeneratedExeptions > maxGenerationTries){
+			throw new IllegalArgumentException(
+				"Generation des Wortes fehlgeschlagen:\n"
+				+ "{maxGenerationTries} mal in Folge konnte kein neues Wort erzeugt werden.\n"
+				+ "Möglicherweise andere Silbenanzahl wählen."
+			);
+		}else{
+			String tempSilbe = "";
+			int status = 1;
+			String wort = silbe1();
+			int silbenNummer = 1;
+			while(silbenNummer < wortLen-1){
+				switch(status){
+					case 0:
+						wort = wort + silbeKV();
+						status = randomNumber(1, 2);
+						break;
+					case 1:
+						wort = wort + silbeKA();
+						if(wort.endsWith("'")){
+							status = 0;
+						}else{
+							status = randomNumber(1, 2);
+						}
+						break;
+					case 2:
+						tempSilbe = silbeAV();
+						wort.concat(tempSilbe);
+						if(tempSilbe.startsWith("'")){
+							status = 0;
+						}else{
+							status = randomNumber(1, 2);
+						}					
+				}
+				silbenNummer++;
+			}
+			wort = wort + silbeEnd();
+			TaubischString temp = new TaubischString(wort);
+			if(alleTauben.search(temp) != null){
+				return erzeugeSubstantiv(wortLen, alreadyGeneratedExeptions+1);
+			}else{
+				alleTauben.insert(temp);
+				return temp;
+			}
+		}
 	}
 	
-	//TODO Pre u Suf silben verbieten
+	public TaubischString erzeugeAdjektiv(int wortLen,int alreadyGeneratedExeptions){
+		if(alreadyGeneratedExeptions > maxGenerationTries){
+			throw new IllegalArgumentException(
+				"Generation des Wortes fehlgeschlagen:\n"
+				+ "{maxGenerationTries} mal in Folge konnte kein neues Wort erzeugt werden.\n"
+				+ "Möglicherweise andere Silbenanzahl wählen."
+			);
+		}else{
+			String tempSilbe = "";
+			int status = 1;
+			String wort = silbe1Adj();
+			int silbenNummer = 1;
+			while(silbenNummer < wortLen-1){
+				switch(status){
+					case 0:
+						wort = wort + silbeKV();
+						status = randomNumber(1, 2);
+						break;
+					case 1:
+						wort = wort + silbeKA();
+						if(wort.endsWith("'")){
+							status = 0;
+						}else{
+							status = randomNumber(1, 2);
+						}
+						break;
+					case 2:
+						tempSilbe = silbeAV();
+						wort.concat(tempSilbe);
+						if(tempSilbe.startsWith("'")){
+							status = 0;
+						}else{
+							status = randomNumber(1, 2);
+						}					
+				}
+				silbenNummer++;
+			}
+			wort = wort + silbeEnd();
+			TaubischString temp = new TaubischString(wort);
+			if(alleTauben.search(temp) != null){
+				return erzeugeSubstantiv(wortLen, alreadyGeneratedExeptions+1);
+			}else{
+				alleTauben.insert(temp);
+				return temp;
+			}
+		}
+	}
+
+	public TaubischString erzeugeVerb(int wortLen,int alreadyGeneratedExeptions){
+		if(alreadyGeneratedExeptions > maxGenerationTries){
+			throw new IllegalArgumentException(
+				"Generation des Wortes fehlgeschlagen:\n"
+				+ "{maxGenerationTries} mal in Folge konnte kein neues Wort erzeugt werden.\n"
+				+ "Möglicherweise andere Silbenanzahl wählen."
+			);
+		}else{
+			String tempSilbe = "";
+			int status = 1;
+			String wort = silbe1();
+			int silbenNummer = 1;
+			while(silbenNummer < wortLen-1){
+				switch(status){
+					case 0:
+						wort = wort + silbeKV();
+						status = randomNumber(1, 2);
+						break;
+					case 1:
+						wort = wort + silbeKA();
+						if(wort.endsWith("'")){
+							status = 0;
+						}else{
+							status = randomNumber(1, 2);
+						}
+						break;
+					case 2:
+						tempSilbe = silbeAV();
+						wort.concat(tempSilbe);
+						if(tempSilbe.startsWith("'")){
+							status = 0;
+						}else{
+							status = randomNumber(1, 2);
+						}					
+				}
+				silbenNummer++;
+			}
+			wort = wort + silbeVerbEnd();
+			TaubischString temp = new TaubischString(wort);
+			if(alleTauben.search(temp) != null){
+				return erzeugeVerb(wortLen, alreadyGeneratedExeptions+1);
+			}else{
+				alleTauben.insert(temp);
+				return temp;
+			}
+		}
+	}
 	
 	public String silbeAV(){
 		String sAV = selectKonsoAp() + selectVokal();
@@ -78,6 +208,10 @@ public class automat{
 	public String silbeEnd(){
 	    String sE = silbeKA();
 		return sE;
+	}
+
+	public String silbe1Adj(){
+        return "sa"; //(scha)
 	}
 	
 	public String selectChar(){
@@ -184,10 +318,12 @@ public class automat{
 		return pKonsoAp;
 	}
 	
+	
 	public static int randomNumber(int von, int bis) {
 	    int randomNr = von + (int)(Math.random() * (double)(bis - von + 1));
 	    return randomNr;
 	}
+	
 	
 	public void constructorOutput(boolean pBoo){
 		if(pBoo){
@@ -263,6 +399,6 @@ public class automat{
    
 	public static void main(String args[]){
 
-        automat pAuto = new automat(false);
+        Wort pAuto = new Wort(false);
     }
 }
