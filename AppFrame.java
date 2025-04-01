@@ -16,7 +16,7 @@ public class AppFrame extends JFrame {
   private JButton jButton1 = new JButton();
   private JTextField deutschTxtField = new JTextField();
   private JTextField taubischTxtField = new JTextField();
-  Wort pWort;
+  WortGenerator pWort;
   int wortArt;
   private JButton listeButton = new JButton();
   private JButton substantivButton = new JButton();
@@ -114,7 +114,7 @@ public class AppFrame extends JFrame {
     
     setVisible(true);
 
-    pWort = new Wort(true);
+    pWort = new WortGenerator(true);
     wortArt = 0;
   }
   
