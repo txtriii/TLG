@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
+//import javax.swing.event.*;
 
 /**
  *
@@ -23,7 +23,6 @@ public class AppFrame extends JFrame {
   private JButton verbButton = new JButton();
   private JButton adjektivButton = new JButton();
   private JLabel wortArtLabel = new JLabel();
-  private JTextField silbenTxtField = new JTextField();
   // Ende Attribute
   
   public AppFrame() { 
@@ -111,9 +110,6 @@ public class AppFrame extends JFrame {
     wortArtLabel.setToolTipText("Wortart");
     cp.add(wortArtLabel);
 
-    silbenTxtField.setBounds(55, 84, 150, 28);
-    silbenTxtField.setToolTipText("SilbenanzahlÜberschreiben");
-    cp.add(silbenTxtField);
     // Ende Komponenten
     
     setVisible(true);
@@ -136,13 +132,11 @@ public class AppFrame extends JFrame {
   }
 
   public void substantivButton_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
     wortArtLabel.setText("Substantiv");
     wortArt = 0;
   }
 
   public void verbButton_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
     wortArtLabel.setText("Verb");
     wortArt = 1;
   }
