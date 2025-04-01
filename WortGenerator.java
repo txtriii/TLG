@@ -1,8 +1,7 @@
 //import sas.Tools;
-public class Wort{
-
-	int apProb;
+public class WortGenerator{
 	int maxGenerationTries = 5;
+	int apProb;
 	static String[] zeichen = {"a","e","s","l","i","th","t","n","'"};
 	static String[] vokal = {"a","e","i"};
 	static String[] konsonant = {"s","l","th","t","n"};
@@ -10,7 +9,7 @@ public class Wort{
 	BinarySearchTree<Uebersetzung> translationTreeDE = new BinarySearchTree<Uebersetzung>();
 	List<Uebersetzung> translationList = new List<Uebersetzung>();
 
-	public Wort(boolean pConOut){
+	public WortGenerator(boolean pConOut){
 		apProb = 3;
 		constructorOutput(pConOut);
 		// for(int menge = 0; menge < 100; menge++){
@@ -46,7 +45,6 @@ public class Wort{
 			}
 		}
 			return translationTreeDE.search(new Uebersetzung(pDeutsch)).getTaubischString();
-			//throw new IllegalArgumentException("Übersetzung für '{pDeutsch}' existiert bereits.");
 	}
 
 	public TaubischString erzeugeSubstantiv(int wortLen,int alreadyGeneratedExeptions){

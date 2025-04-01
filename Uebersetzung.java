@@ -1,14 +1,14 @@
 public class Uebersetzung implements ComparableContent<Uebersetzung>{
     private String deutsch;
     private TaubischString taubisch;
-    // private int taubischZahl;
-    private int iD;
-    public Uebersetzung(String pDeutsch, TaubischString pTaubisch, int pID){
-        this.deutsch = pDeutsch;
-        this.taubisch = pTaubisch;
-        this.iD = pID;
-        //this.taubischZahl = pTaubischZahl;
-    }
+    //private int taubischZahl;
+    //private int iD;
+    // public Uebersetzung(String pDeutsch, TaubischString pTaubisch, int pID){
+    //     this.deutsch = pDeutsch;
+    //     this.taubisch = pTaubisch;
+    //     this.iD = pID;
+    //     //this.taubischZahl = pTaubischZahl;
+    // }
     public Uebersetzung(String pDeutsch, TaubischString pTaubisch){
         this.deutsch = pDeutsch;
         this.taubisch = pTaubisch;
@@ -16,7 +16,7 @@ public class Uebersetzung implements ComparableContent<Uebersetzung>{
     public Uebersetzung(String pDeutsch){
         this.deutsch = pDeutsch;
     }
-   
+
     public String getDeutsch(){
         return this.deutsch;
     }
@@ -26,9 +26,9 @@ public class Uebersetzung implements ComparableContent<Uebersetzung>{
     public TaubischString getTaubischTString(){
         return this.taubisch;
     }
-    public int getID(){
-        return this.iD;
-    }
+    // public int getID(){
+    //     return this.iD;
+    // }
     // public int getTaubischZahl(){
     //     return this.taubischZahl;
     // }
