@@ -1,6 +1,8 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\twgam\\Downloads\\sasRetina_java8.jar"
+        "c:\\Users\\twgam\\Downloads\\sasRetina_java8.jar",
+        "c:\\Users\\twgam\\Desktop\\2020-03-11_Implementationen_von_Klassen_fuer_das_Zentralabitur_ab_2018_nur_GK mit SQLite\\02 Datenbankklassen mit SQLite\\sqlite-jdbc-3.44.1.0.jar",
+        "c:\\Users\\twgam\\Desktop\\2020-03-11_Implementationen_von_Klassen_fuer_das_Zentralabitur_ab_2018_nur_GK mit SQLite\\02 Datenbankklassen mit SQLite\\slf4j-api-1.7.36.jar"
     ]
 }
