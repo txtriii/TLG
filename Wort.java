@@ -1,4 +1,4 @@
-import sas.Tools;
+//import sas.Tools;
 public class Wort{
 
 	int apProb;
@@ -8,6 +8,7 @@ public class Wort{
 	static String[] konsonant = {"s","l","th","t","n"};
 	BinarySearchTree<TaubischString> alleTauben = new BinarySearchTree<TaubischString>();
 	BinarySearchTree<Uebersetzung> translationTreeDE = new BinarySearchTree<Uebersetzung>();
+	List<Uebersetzung> translationList = new List<Uebersetzung>();
 
 	public Wort(boolean pConOut){
 		apProb = 3;
@@ -15,25 +16,37 @@ public class Wort{
 		// for(int menge = 0; menge < 100; menge++){
 		// System.out.println(erzeugeWort(7));
 		// }
+		uebersetze("Test", 0, 4);
 	}
 	
 
-	public void uebersetze(String pDeutsch, int pWortArt,int pLen){
+	public String uebersetze(String pDeutsch, int pWortArt,int pLen){
 		if(translationTreeDE.search(new Uebersetzung(pDeutsch)) == null){
 			switch (pWortArt){
 				case 0:
-					translationTreeDE.insert(new Uebersetzung(pDeutsch,erzeugeSubstantiv(pLen,0)));
+					Uebersetzung tempS = new Uebersetzung(pDeutsch,erzeugeSubstantiv(pLen,0));
+					translationTreeDE.insert(tempS);
+					translationList.append(tempS);
 					break;
 				case 1:
-					translationTreeDE.insert(new Uebersetzung(pDeutsch,erzeugeVerb(pLen,0)));
+					Uebersetzung tempV = new Uebersetzung(pDeutsch,erzeugeVerb(pLen,0));
+					translationTreeDE.insert(tempV);
+					translationList.append(tempV);
+					break;
+				case 2:
+				    Uebersetzung tempA = new Uebersetzung(pDeutsch,erzeugeAdjektiv(pLen,0));
+				    translationTreeDE.insert(tempA);
+					translationList.append(tempA);
 					break;
 				default:
-					translationTreeDE.insert(new Uebersetzung(pDeutsch,erzeugeSubstantiv(pLen,0)));
+					Uebersetzung temp = new Uebersetzung(pDeutsch,erzeugeSubstantiv(pLen,0));
+					translationTreeDE.insert(temp);
+					translationList.append(temp);
 					break;
 			}
-		}else{
-			throw new IllegalArgumentException("Übersetzung für '{pDeutsch}' existiert bereits.");
 		}
+			return translationTreeDE.search(new Uebersetzung(pDeutsch)).getTaubischString();
+			//throw new IllegalArgumentException("Übersetzung für '{pDeutsch}' existiert bereits.");
 	}
 
 	public TaubischString erzeugeSubstantiv(int wortLen,int alreadyGeneratedExeptions){
@@ -177,6 +190,14 @@ public class Wort{
 				alleTauben.insert(temp);
 				return temp;
 			}
+		}
+	}
+
+	public void printTranslationList(){
+		translationList.toFirst();
+		while(translationList.hasAccess()){
+			System.out.println(translationList.getContent().getDeutsch() + ": " + translationList.getContent().getTaubischString());
+            translationList.next();
 		}
 	}
 	
@@ -396,9 +417,4 @@ public class Wort{
 		}
 	}
 	// / / / / /
-   
-	public static void main(String args[]){
-
-        Wort pAuto = new Wort(false);
-    }
 }
