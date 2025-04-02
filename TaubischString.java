@@ -23,3 +23,4 @@ public class TaubischString implements ComparableContent<TaubischString> {
         return this.value.compareTo(other.getValue()) < 0;
     }
 }
+

@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
+//import javax.swing.event.*;
 
 /**
  *
@@ -16,14 +16,13 @@ public class AppFrame extends JFrame {
   private JButton jButton1 = new JButton();
   private JTextField deutschTxtField = new JTextField();
   private JTextField taubischTxtField = new JTextField();
-  Wort pWort;
+  WortGenerator pWort;
   int wortArt;
   private JButton listeButton = new JButton();
   private JButton substantivButton = new JButton();
   private JButton verbButton = new JButton();
   private JButton adjektivButton = new JButton();
   private JLabel wortArtLabel = new JLabel();
-  private JTextField silbenTxtField = new JTextField();
   // Ende Attribute
   
   public AppFrame() { 
@@ -111,14 +110,11 @@ public class AppFrame extends JFrame {
     wortArtLabel.setToolTipText("Wortart");
     cp.add(wortArtLabel);
 
-    silbenTxtField.setBounds(55, 84, 150, 28);
-    silbenTxtField.setToolTipText("SilbenanzahlÜberschreiben");
-    cp.add(silbenTxtField);
     // Ende Komponenten
     
     setVisible(true);
 
-    pWort = new Wort(true);
+    pWort = new WortGenerator(true);
     wortArt = 0;
   }
   
@@ -136,13 +132,11 @@ public class AppFrame extends JFrame {
   }
 
   public void substantivButton_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
     wortArtLabel.setText("Substantiv");
     wortArt = 0;
   }
 
   public void verbButton_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
     wortArtLabel.setText("Verb");
     wortArt = 1;
   }
