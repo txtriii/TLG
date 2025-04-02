@@ -10,11 +10,15 @@ public class WortGenerator{
 	List<Uebersetzung> translationList = new List<Uebersetzung>();
 
 	public WortGenerator(boolean pConOut){
+		DatabaseConnector sprachDatabaseConnector = new DatabaseConnector("0",0,"sprachDB.db","user","pass");
 		apProb = 3;
 		constructorOutput(pConOut);
 		// for(int menge = 0; menge < 100; menge++){
 		// System.out.println(erzeugeWort(7));
 		// }
+		sprachDatabaseConnector.executeStatement("select * from lexikon where ID == 0");
+		System.out.println(sprachDatabaseConnector.getCurrentQueryResult());
+		System.out.println(sprachDatabaseConnector.getErrorMessage());
 		uebersetze("Test", 0, 4);
 	}
 	
